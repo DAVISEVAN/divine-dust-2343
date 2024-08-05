@@ -1,0 +1,13 @@
+<div id="flight-<%= flight[:flight].id %>">
+  <h2>Flight Number: <%= flight[:flight].number %></h2>
+  <p>Airline: <%= flight[:flight].airline_name %></p>
+  <p>Passengers:</p>
+  <ul>
+    <% flight[:passengers].each do |passenger| %>
+      <li>
+        <%= passenger[:name] %>
+        <%= link_to 'Remove', flight_flight_passenger_path(flight[:flight].id, passenger[:id]), method: :delete %>
+      </li>
+    <% end %>
+  </ul>
+</div>

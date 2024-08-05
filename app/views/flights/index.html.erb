@@ -1,17 +1,4 @@
 <h1>Flights</h1>
-<% @flights.each do |flight_id, flight_records| %>
-  <div id="flight-<%= flight_id %>">
-    <% flight = flight_records.first %>
-    <h2>Flight Number: <%= flight.number %></h2>
-    <p>Airline: <%= flight.airline_name %></p>
-    <p>Passengers:</p>
-    <ul>
-      <% flight_records.each do |record| %>
-        <li>
-            <%= record.passenger_name %>
-            <%= link_to 'Remove', flight_flight_passenger_path(flight_id, record.passenger_id), method: :delete %>
-            </li>
-      <% end %>
-    </ul>
-  </div>
+<% @flights.each do |flight_id, flight| %>
+  <%= render partial: 'flights/flight', locals: { flight: flight } %>
 <% end %>
