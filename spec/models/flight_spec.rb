@@ -47,5 +47,11 @@ RSpec.describe Flight, type: :model do
       expect(flight2_data.first.airline_name).to eq(@airline2.name)
       expect(flight2_data.map(&:passenger_name)).to match_array(["Mary Poppins", "Walter White", "John Wick", "Little Kid"])
     end
+
+    it 'removes a passenger from a flight' do
+      expect(@flight1.passengers).to include(@passenger1)
+      @flight1.remove_passenger(@passenger1)
+      expect(@flight1.passengers).to_not include(@passenger1)
+    end
   end
 end

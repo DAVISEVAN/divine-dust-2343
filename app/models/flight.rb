@@ -5,7 +5,11 @@ class Flight < ApplicationRecord
 
    def self.with_airline_and_passengers
       joins(:airline, :passengers)
-        .select('flights.id, flights.number, airlines.name as airline_name, passengers.name as passenger_name')
+        .select('flights.*, airlines.name as airline_name, flight_passengers.passenger_id as passenger_id, passengers.name as passenger_name')
         .group_by(&:id)
+    end
+
+    def remove_passenger(passenger)
+      flight_passengers.find_by(passenger_id: passenger.id).destroy
     end
 end
